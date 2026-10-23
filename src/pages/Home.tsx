@@ -9,7 +9,8 @@ import {
   ArrowRight,
   Heart,
   Compass,
-  Film
+  Film,
+  Flower2
 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 
@@ -21,6 +22,7 @@ export const Home: React.FC = () => {
     BookHeart,
     Feather,
     Film,
+    Flower2,
   };
 
   // Visual card configurations with distinctive identities
@@ -85,6 +87,16 @@ export const Home: React.FC = () => {
       illustrationSymbol: "💌",
       actionText: "Her Personal Space",
     },
+    {
+      gradient: "from-[#F2F8F4] to-[#EAF3EC]",
+      border: "border-[#D0E5D7]",
+      tagBg: "bg-[#DCEEE2]",
+      tagText: "text-[#3E5F4B]",
+      buttonBg: "bg-[#3E5F4B] hover:bg-[#2F4A39]",
+      accentRing: "hover:ring-[#D0E5D7]/60",
+      illustrationSymbol: "🪷",
+      actionText: "Enter Lily Sanctuary",
+    },
   ];
 
   return (
@@ -94,7 +106,7 @@ export const Home: React.FC = () => {
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFEBEF] text-[#8C565F] text-xs font-semibold tracking-wide mb-3 border border-[#FED7DF] shadow-2xs">
           <span>🧸</span>
           <span>A dedicated space for {siteConfig.recipientName}</span>
-          <span>🎀✨</span>
+          <span>🪷✨</span>
         </div>
 
         <h1 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-[#2C2727] mb-3 leading-tight">
@@ -110,7 +122,7 @@ export const Home: React.FC = () => {
         </p>
       </section>
 
-      {/* Six Gateway Cards Grid (Balanced 3x2 on desktop, 2-col on tablet, 1-col on phone) */}
+      {/* Gateway Cards Grid */}
       <section aria-label="Theme Gateways" className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {siteConfig.themeCards.map((card, idx) => {
@@ -177,9 +189,9 @@ export const Home: React.FC = () => {
       {/* Small comforting quote at the bottom of the home screen */}
       <section className="mt-14 text-center">
         <div className="inline-flex items-center gap-2 text-xs text-[#8C7A75] bg-white/70 px-4 py-2 rounded-full border border-[#E8DFD3] shadow-2xs">
-          <span className="text-sm">🧸</span>
+          <span className="text-sm">🪷</span>
           <span>Every theme is independent. Wander wherever your heart leads you.</span>
-          <span className="text-sm">🌸</span>
+          <span className="text-sm">🧸</span>
         </div>
       </section>
     </div>

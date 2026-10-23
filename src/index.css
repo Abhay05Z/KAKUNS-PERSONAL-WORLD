@@ -14,11 +14,48 @@
     --warm-brown: #4D3F3B;
   }
 
+  /* Soft Theme 2: White Lily & Pale Sage */
+  html.theme-lily {
+    --bg-main: #F7FAF7;
+    --paper-card: #FFFFFF;
+    --cream-accent: #EBF2EC;
+    --blush-accent: #E2ECE5;
+    --dusty-rose: #688C78;
+    --deep-rose: #3F5E4C;
+    --charcoal: #25332B;
+    --warm-brown: #3E4D43;
+  }
+
+  /* Soft Theme 3: Muted Lavender Starlight */
+  html.theme-lavender {
+    --bg-main: #FAF8FC;
+    --paper-card: #FFFFFF;
+    --cream-accent: #F2ECF9;
+    --blush-accent: #E6DCF3;
+    --dusty-rose: #9A7FB8;
+    --deep-rose: #634C7D;
+    --charcoal: #2A2433;
+    --warm-brown: #453B52;
+  }
+
+  /* Soft Theme 4: Vanilla Honey Cream */
+  html.theme-vanilla {
+    --bg-main: #FDFBF7;
+    --paper-card: #FFFFFF;
+    --cream-accent: #F5EFE3;
+    --blush-accent: #EADBC1;
+    --dusty-rose: #A88B5D;
+    --deep-rose: #6F5535;
+    --charcoal: #2E2922;
+    --warm-brown: #4E4334;
+  }
+
   body {
     background-color: var(--bg-main);
     color: var(--charcoal);
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   h1, h2, h3, h4, .font-serif {
@@ -50,6 +87,33 @@
 .polaroid-frame:hover {
   transform: translateY(-4px) rotate(-0.5deg);
   box-shadow: 0 18px 35px -8px rgba(180, 123, 130, 0.2), 0 8px 16px -4px rgba(60, 40, 40, 0.06);
+}
+
+/* Falling Lily Petals Animation */
+@keyframes fallLily {
+  0% {
+    opacity: 0;
+    top: -10%;
+    transform: translateX(0) rotate(0deg) scale(0.8);
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    top: 105%;
+    transform: translateX(120px) rotate(360deg) scale(1);
+  }
+}
+
+.animate-petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 35;
+  animation: fallLily linear infinite;
 }
 
 /* Washi tape effect */

@@ -1,5 +1,7 @@
+export type SoftThemeMode = 'blush' | 'lily' | 'lavender' | 'vanilla';
+
 export interface SiteConfig {
-  recipientName: string; // Configurable placeholder e.g. "Kakun" or "[Her Name]"
+  recipientName: string;
   recipientNickname?: string;
   welcomeHeading: string;
   welcomeSubheading: string;
@@ -38,9 +40,9 @@ export interface GalleryItem {
   date?: string;
   focalPosition?: string;
   note?: string;
-  rotation?: string; // e.g. '-2deg', '1.5deg' for scrapbook feel
-  washiColor?: string; // washi tape tint
-  pookieEmoji?: string; // e.g. 🧸, 🎀, 🥺, 🌸, 🍓
+  rotation?: string;
+  washiColor?: string;
+  pookieEmoji?: string;
 }
 
 export interface VideoItem {
@@ -63,6 +65,16 @@ export interface PoetryEnvelopeItem {
   envelopeColor: string;
   waxSealColor: string;
   dedication?: string;
+}
+
+export interface LilyCard {
+  id: string;
+  name: string;
+  botanicalName: string;
+  meaning: string;
+  whisper: string;
+  pookieEmoji: string;
+  bgColor: string;
 }
 
 export interface PersonalityEntry {

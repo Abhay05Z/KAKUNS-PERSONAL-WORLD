@@ -97,6 +97,18 @@ export const siteConfig: SiteConfig = {
       previewImage: "/assets/gallery/photo-05.webp",
       pookieEmoji: "🧁",
     },
+    {
+      id: "lily-sanctuary",
+      title: "THE LILY SANCTUARY",
+      subtitle: "White Lilies & Soft Solace",
+      description: "A whisper-soft haven of blooming white lilies, falling petals, gentle chimes, and peaceful stillness 🪷🤍",
+      path: "/lily-sanctuary",
+      accentColor: "#EBF4EE",
+      badge: "New • Soft Lily Haven",
+      iconName: "Flower2",
+      previewImage: "/assets/gallery/photo-49.jpg",
+      pookieEmoji: "🪷",
+    },
   ],
 };
 

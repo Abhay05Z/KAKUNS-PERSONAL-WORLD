@@ -22,6 +22,7 @@ export const Footer: React.FC = () => {
           <Link to="/" className="hover:text-[#8C565F] transition-colors">Home</Link>
           <Link to="/gallery" className="hover:text-[#8C565F] transition-colors">Gallery (49)</Link>
           <Link to="/poetry" className="hover:text-[#8C565F] transition-colors">Poetry & Reels (56) 🧸</Link>
+          <Link to="/lily-sanctuary" className="hover:text-[#3E5F4B] transition-colors">Lily Sanctuary 🪷</Link>
           <Link to="/mindset" className="hover:text-[#8C565F] transition-colors">Mind & Personality</Link>
           <Link to="/perspective" className="hover:text-[#8C565F] transition-colors">The Way I See Her</Link>
           <Link to="/reminders" className="hover:text-[#8C565F] transition-colors">Things to Remember</Link>
