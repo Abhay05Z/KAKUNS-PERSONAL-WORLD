@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { TeddyWidget } from './TeddyWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -29,6 +30,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
       <Footer />
+      {/* Interactive Cute Teddy Companion */}
+      <TeddyWidget />
     </div>
   );
 };

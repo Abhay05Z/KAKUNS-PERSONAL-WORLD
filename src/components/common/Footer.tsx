@@ -17,10 +17,11 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Five Themes Quick Links */}
+        {/* Quick Links */}
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-medium text-[#645450]">
           <Link to="/" className="hover:text-[#8C565F] transition-colors">Home</Link>
-          <Link to="/gallery" className="hover:text-[#8C565F] transition-colors">Gallery</Link>
+          <Link to="/gallery" className="hover:text-[#8C565F] transition-colors">Gallery (49)</Link>
+          <Link to="/poetry" className="hover:text-[#8C565F] transition-colors">Poetry & Reels (56) 🧸</Link>
           <Link to="/mindset" className="hover:text-[#8C565F] transition-colors">Mind & Personality</Link>
           <Link to="/perspective" className="hover:text-[#8C565F] transition-colors">The Way I See Her</Link>
           <Link to="/reminders" className="hover:text-[#8C565F] transition-colors">Things to Remember</Link>

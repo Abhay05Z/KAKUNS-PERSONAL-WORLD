@@ -1,5 +1,5 @@
 export interface SiteConfig {
-  recipientName: string; // Configurable placeholder e.g. "Kakun"
+  recipientName: string; // Configurable placeholder e.g. "Kakun" or "[Her Name]"
   recipientNickname?: string;
   welcomeHeading: string;
   welcomeSubheading: string;
@@ -17,17 +17,17 @@ export interface ThemeCardConfig {
   badge: string;
   iconName: string;
   previewImage?: string;
+  pookieEmoji?: string;
 }
 
 export type GalleryCategory =
   | 'all'
-  | 'new'
   | 'favorites'
   | 'candid'
   | 'portraits'
   | 'places'
   | 'memories'
-  | 'poetry-reels';
+  | 'newest';
 
 export interface GalleryItem {
   id: string;
@@ -38,23 +38,31 @@ export interface GalleryItem {
   date?: string;
   focalPosition?: string;
   note?: string;
-  poetrySnippet?: string;
-  isNewAddition?: boolean;
-  tiltAngle?: number;
-  tapeColor?: string;
-  pookieSticker?: string;
+  rotation?: string; // e.g. '-2deg', '1.5deg' for scrapbook feel
+  washiColor?: string; // washi tape tint
+  pookieEmoji?: string; // e.g. 🧸, 🎀, 🥺, 🌸, 🍓
 }
 
-export interface PoetryVideoItem {
+export interface VideoItem {
   id: string;
   videoPath: string;
-  thumbnailPath: string;
   title: string;
-  couplet: string; // Hindi/Urdu couplet or poetic lines
-  translation?: string; // Poetic English reflection
-  mood: 'soulful' | 'aesthetic' | 'nazm' | 'whimsical' | 'melodic' | 'warm';
-  durationTag?: string;
-  pookieEmoji?: string;
+  poetrySnippet?: string;
+  category: 'poetry' | 'moments' | 'candid' | 'vibes' | 'aesthetic';
+  pookieEmoji: string;
+  duration?: string;
+}
+
+export interface PoetryEnvelopeItem {
+  id: string;
+  title: string;
+  verses: string[];
+  imagePath?: string;
+  videoPath?: string;
+  pookieEmoji: string;
+  envelopeColor: string;
+  waxSealColor: string;
+  dedication?: string;
 }
 
 export interface PersonalityEntry {
@@ -65,7 +73,7 @@ export interface PersonalityEntry {
   categoryTitle?: string;
   quote?: string;
   tags?: string[];
-  poeticVerse?: string;
+  pookieEmoji?: string;
 }
 
 export interface PerspectiveEntry {
@@ -74,7 +82,7 @@ export interface PerspectiveEntry {
   body: string;
   highlightPhrase?: string;
   category: 'appreciation' | 'noticed' | 'respect' | 'unique' | 'letter';
-  poeticNote?: string;
+  pookieEmoji?: string;
 }
 
 export interface ReminderItem {
@@ -84,7 +92,7 @@ export interface ReminderItem {
   category: 'difficult-day' | 'worth' | 'daily' | 'rest' | 'control';
   tag: string;
   isDailyFeatured?: boolean;
-  teddyHugMessage?: string;
+  pookieEmoji?: string;
 }
 
 export interface RitualItem {
@@ -94,6 +102,7 @@ export interface RitualItem {
   frequency: string;
   category: string;
   iconName: string;
+  pookieEmoji?: string;
 }
 
 export interface MemoryItem {
@@ -104,7 +113,7 @@ export interface MemoryItem {
   description: string;
   imagePath?: string;
   personalNote?: string;
-  poeticLine?: string;
+  pookieEmoji?: string;
 }
 
 export interface LetterConfig {
@@ -129,4 +138,5 @@ export interface JarQuote {
   id: string;
   text: string;
   category: string;
+  pookieEmoji?: string;
 }
