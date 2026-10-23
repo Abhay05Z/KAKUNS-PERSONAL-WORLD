@@ -7,17 +7,18 @@
 
 This project is an intimate, scrapbook-inspired digital experience structured around **five distinct, independently accessible themes**. It is intentionally art-directed to feel like a warm personal journal rather than a generic portfolio or conventional blog.
 
-### 🌟 The Five Themes
-1. **Her Gallery (`/#/gallery`)**: Curated photo grids, polaroid-style frames, category filtering (Favorites, Candid, Portraits, Places, Memories), responsive image lightbox with keyboard controls (Arrow keys, Escape) and custom captions.
-2. **Her Mind & Personality (`/#/mindset`)**: Editorial cards showcasing her nature, values, quiet strengths, dreams, and signature traits. Thoughtfully distinguishes her direct words from observations.
-3. **The Way I See Her (`/#/perspective`)**: Warm, sincere reflections, subtle qualities she might overlook in herself, things to respect, and words put into writing.
-4. **Things She Should Remember (`/#/reminders`)**: Grounding advice for difficult days, permission to rest, small steps, what is within control, interactive random reminder reveal, and local "Save to Favorites" support.
-5. **Her Personal Space (`/#/personal-space`)**:
-   - **Personal Rituals**: Gentle routines (morning quiet, deep breaths, music) with zero-guilt completion toggles.
-   - **Timeline Memories**: Scrapbook-style milestones with date, location, photo, and notes.
-   - **Personal Letter**: Paper-textured personal letter with comfortable reading width and wax-seal aesthetic.
-   - **Interactive Surprises**: Clickable wax-sealed envelope, digital Jar of Kind Words (12 uplifting slips to draw), hidden message reveal card, and soft confetti celebration.
-   - **Private Notes**: Private scratchpad stored strictly on the local device.
+### 🌟 Explore the World
+1. **Her Gallery (`/#/gallery`)**: All **49 photographs** (including the 3 brand-new additions) arranged in multiple manners: *Scrapbook Collage* (with washi tape, organic rotations, and cute pookie emoji stickers), *Polaroid Wall*, and *Classic Grid*. Click-to-expand lightbox with captions and keyboard navigation.
+2. **Poetry & Video Vault (`/#/poetry`)**: All **56 video reels** paired with lyrical verses, plus **interactive wax-sealed envelopes** (🧸, 🎀, 🍓, 🧁, 🍰) that unseal with heartfelt poetry and framed photographs!
+3. **Her Mind & Personality (`/#/mindset`)**: Editorial cards showcasing her nature, values, quiet strengths, dreams, and signature traits.
+4. **The Way I See Her (`/#/perspective`)**: Warm, sincere reflections, subtle qualities she might overlook in herself, and heartfelt appreciation.
+5. **Things She Should Remember (`/#/reminders`)**: Grounding advice for difficult days, permission to rest, random reminder reveal, and local "Save to Favorites" support.
+6. **Her Personal Space (`/#/personal-space`)**:
+   - **Personal Rituals**: Gentle routines with zero-guilt completion toggles.
+   - **Timeline Memories**: Scrapbook milestones with date, location, photo, and notes.
+   - **Personal Letter**: Paper-textured letter with wax seal aesthetic.
+   - **Interactive Surprises**: Clickable envelopes, Digital Jar of Kind Words, hidden message reveal, and celebration confetti.
+   - **Teddy Companion 🧸**: Interactive floating teddy mascot offering cute hugs, affirmations, and pastel sparkle bursts!
 
 ---
 
