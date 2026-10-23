@@ -4,7 +4,6 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { TeddyWidget } from './TeddyWidget';
 import { LilyPetals } from './LilyPetals';
-import { BackgroundPookiePhotos } from './BackgroundPookiePhotos';
 import { useTheme } from '../../context/ThemeContext';
 
 interface LayoutProps {
@@ -43,9 +42,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           style={{ backgroundColor: colors.gradient3 }}
         />
       </div>
-
-      {/* Her Photos in Cute Pookie Frames pinned in the Background */}
-      <BackgroundPookiePhotos />
 
       {/* Floating Lily Petals drifting softly across the screen */}
       <LilyPetals enabled={lilyPetals} />
