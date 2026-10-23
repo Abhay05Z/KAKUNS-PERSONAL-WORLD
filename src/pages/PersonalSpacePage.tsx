@@ -336,38 +336,67 @@ export const PersonalSpacePage: React.FC = () => {
           </div>
 
           {/* Letter Container */}
-          <div className="rounded-2xl p-6 sm:p-12 bg-[#FCFAF7] border border-[#DFCBA8] shadow-polaroid relative paper-texture">
+          <div className="rounded-3xl p-6 sm:p-12 bg-[#FCFAF7] border border-[#DFCBA8] shadow-polaroid relative paper-texture">
             {/* Washi tape header */}
             <div className="washi-tape" />
 
             <div className="flex items-center justify-between text-xs text-[#8C7A75] mb-6 pt-2 pb-4 border-b border-[#EADBC1]">
               <span className="font-serif italic">{personalLetter.date}</span>
-              <span className="font-sans">Private & Personal</span>
+              <span className="font-sans flex items-center gap-1 text-[#8C565F]">
+                <span>🧸</span>
+                <span>Private & Personal</span>
+                <span>💌</span>
+              </span>
             </div>
 
-            <div className="font-serif text-xl sm:text-2xl font-semibold text-[#2C2727] mb-6">
-              {personalLetter.salutation}
-            </div>
-
-            {/* Letter Paragraphs */}
-            <div className="space-y-4 font-sans text-sm sm:text-base text-[#3D3838] leading-relaxed">
-              {personalLetter.paragraphs.map((p, pIdx) => (
-                <p key={pIdx}>{p}</p>
-              ))}
-            </div>
-
-            {/* Closing & Signature */}
-            <div className="mt-8 pt-6 border-t border-[#EADBC1]">
-              <p className="font-sans text-sm text-[#645450] mb-2">{personalLetter.closing}</p>
-              <p className="font-handwriting text-3xl text-[#8C565F]">
-                {personalLetter.signature}
-              </p>
-
-              {personalLetter.postscript && (
-                <div className="mt-6 pt-4 border-t border-dashed border-[#DFCBA8] text-xs text-[#7A6B67] italic font-serif">
-                  {personalLetter.postscript}
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              {/* Main Letter Content */}
+              <div className="flex-1">
+                <div className="font-serif text-xl sm:text-2xl font-semibold text-[#2C2727] mb-6">
+                  {personalLetter.salutation}
                 </div>
-              )}
+
+                {/* Letter Paragraphs */}
+                <div className="space-y-4 font-sans text-sm sm:text-base text-[#3D3838] leading-relaxed">
+                  {personalLetter.paragraphs.map((p, pIdx) => (
+                    <p key={pIdx}>{p}</p>
+                  ))}
+                </div>
+
+                {/* Closing & Signature */}
+                <div className="mt-8 pt-6 border-t border-[#EADBC1]">
+                  <p className="font-sans text-sm text-[#645450] mb-2">{personalLetter.closing}</p>
+                  <p className="font-handwriting text-3xl text-[#8C565F]">
+                    {personalLetter.signature}
+                  </p>
+
+                  {personalLetter.postscript && (
+                    <div className="mt-6 pt-4 border-t border-dashed border-[#DFCBA8] text-xs text-[#7A6B67] italic font-serif">
+                      {personalLetter.postscript}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Polaroid Photo of Her Pinned to the Letter */}
+              <div className="w-48 sm:w-56 shrink-0 mx-auto md:mx-0">
+                <div className="polaroid-frame p-3 bg-white rounded-xl shadow-lg rotate-2 hover:rotate-0 transition-transform relative group">
+                  <div className="washi-tape bg-[#FED7DF]" />
+                  <span className="absolute -top-3 -right-3 text-2xl filter drop-shadow-sm group-hover:scale-125 transition-transform">
+                    🧸
+                  </span>
+                  <div className="aspect-square w-full rounded-lg overflow-hidden bg-[#FAF0E6] mb-2 border border-[#F2ECE4]">
+                    <img
+                      src="/assets/gallery/photo-01.webp"
+                      alt="Kakun"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <p className="font-handwriting text-center text-sm font-semibold text-[#8C565F]">
+                    Kakun, smiling softly 🧸💖
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -406,16 +435,30 @@ export const PersonalSpacePage: React.FC = () => {
                 </p>
 
                 {envelopeOpen ? (
-                  <div className="p-4 rounded-xl bg-[#FFF5F5] border border-[#FED7DF] animate-fade-in">
-                    <p className="font-handwriting text-xl text-[#8C565F] leading-snug">
-                      "{surpriseItems[0].revealedContent}"
-                    </p>
-                    <button
-                      onClick={() => setEnvelopeOpen(false)}
-                      className="mt-3 text-[11px] text-[#A08883] hover:underline"
-                    >
-                      Fold note back into envelope
-                    </button>
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#FFF5F5] border border-[#FED7DF] animate-fade-in flex flex-col sm:flex-row items-center gap-4">
+                    <div className="w-24 sm:w-28 shrink-0">
+                      <div className="polaroid-frame p-1.5 pb-2 bg-white rounded-lg shadow-sm rotate-[-2deg]">
+                        <img
+                          src="/assets/gallery/photo-06.webp"
+                          alt="Kakun"
+                          className="aspect-square w-full object-cover rounded"
+                        />
+                        <p className="font-handwriting text-center text-[10px] text-[#8C565F] mt-0.5">
+                          For you 🧸💖
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex-1 text-center sm:text-left">
+                      <p className="font-handwriting text-lg sm:text-xl text-[#8C565F] leading-snug">
+                        "{surpriseItems[0].revealedContent}"
+                      </p>
+                      <button
+                        onClick={() => setEnvelopeOpen(false)}
+                        className="mt-3 text-[11px] text-[#A08883] hover:underline block"
+                      >
+                        Fold note back into envelope 💌
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div

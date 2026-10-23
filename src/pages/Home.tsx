@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import { ThemeSelectorBar } from '../components/common/ThemeSelectorBar';
+import { PookiePhotoEnvelope } from '../components/common/PookiePhotoEnvelope';
 
 export const Home: React.FC = () => {
   const iconMap: Record<string, React.FC<{ className?: string }>> = {
@@ -125,6 +126,22 @@ export const Home: React.FC = () => {
         {/* Prominent One-Click Soft Theme Switcher Bar */}
         <div className="mt-5">
           <ThemeSelectorBar />
+        </div>
+
+        {/* Featured Welcome Envelope with Her Photo */}
+        <div className="mt-6 text-left">
+          <PookiePhotoEnvelope
+            title="A Welcome Envelope for Kakun 🧸✉️"
+            subtitle="Click to unseal and read a sweet welcome note with your framed portrait"
+            sealEmoji="🧸"
+            envelopeColor="#FFF0F3"
+            sealColor="#8C565F"
+            photoSrc="/assets/gallery/photo-01.webp"
+            photoCaption="A sweet smile to start your journey 🧸💖"
+            highlightText="Take your time. There is no hurry here."
+            paragraph="Welcome to your personal digital world. Explore all 49 photos, 56 video reels, poetry envelopes, soothing lily chimes, and gentle reminders whenever you need a peaceful breath. This space was crafted entirely for you."
+            pookieBadge="Welcome Envelope • For Kakun 🌸"
+          />
         </div>
       </section>
 

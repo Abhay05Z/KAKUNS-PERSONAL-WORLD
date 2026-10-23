@@ -12,6 +12,7 @@ import {
   Wind
 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
+import { PookiePhotoEnvelope } from '../components/common/PookiePhotoEnvelope';
 
 export const LilySanctuaryPage: React.FC = () => {
   const [bloomCount, setBloomCount] = useState(1);
@@ -106,7 +107,6 @@ export const LilySanctuaryPage: React.FC = () => {
         setAudioCtx(ctx);
         setSoundPlaying(true);
 
-        // Play gentle harmonic chimes
         const playChimeNote = (freq: number, delay: number) => {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
@@ -126,7 +126,6 @@ export const LilySanctuaryPage: React.FC = () => {
           playChimeNote(freq, idx * 0.4);
         });
 
-        // Loop periodic peaceful chime chords
         const interval = setInterval(() => {
           if (ctx.state === 'closed') {
             clearInterval(interval);
@@ -147,7 +146,7 @@ export const LilySanctuaryPage: React.FC = () => {
   return (
     <div className="w-full">
       {/* Header Section */}
-      <section className="text-center pt-2 sm:pt-4 pb-8 max-w-2xl mx-auto">
+      <section className="text-center pt-2 sm:pt-4 pb-6 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EBF4EE] text-[#3E5F4B] text-xs font-semibold tracking-wide mb-3 border border-[#D0E5D7] shadow-2xs">
           <span>🪷</span>
           <span>Theme 07 • The Lily Sanctuary & Soft Haven</span>
@@ -166,7 +165,7 @@ export const LilySanctuaryPage: React.FC = () => {
         <div className="mt-5 flex items-center justify-center gap-3">
           <button
             onClick={toggleSoundscape}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium transition-all shadow-sm ${
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all shadow-sm ${
               soundPlaying
                 ? 'bg-[#3E5F4B] text-white animate-pulse'
                 : 'bg-white/90 text-[#3E5F4B] hover:bg-[#EBF4EE] border border-[#D0E5D7]'
@@ -176,6 +175,23 @@ export const LilySanctuaryPage: React.FC = () => {
             <span>{soundPlaying ? 'Soothing Chimes Playing 🎐' : 'Listen to Soft Lily Chimes 🎐'}</span>
           </button>
         </div>
+      </section>
+
+      {/* Featured Photo Envelope for Lily Sanctuary */}
+      <section className="max-w-4xl mx-auto mb-10">
+        <PookiePhotoEnvelope
+          title="A Lily Garden Letter for Kakun 🪷✉️"
+          subtitle="Click to unseal a serene reflection with your framed photograph"
+          sealEmoji="🪷"
+          envelopeColor="#F4FAF6"
+          sealColor="#3E5F4B"
+          photoSrc="/assets/gallery/photo-10.webp"
+          photoCaption="Radiance and gentle poise 🪷✨"
+          highlightText="The lily blooms in its own time without comparing itself to the rose."
+          paragraph="Like a white lily, your spirit is calm, elegant, and sincere. You bring peace to noisy rooms simply by being gentle. May this sanctuary always remind you that the world is lucky to have your quiet, tender light."
+          pookieBadge="Sacred Lily Envelope • Serenity 🤍"
+          washiColor="rgba(208, 232, 215, 0.85)"
+        />
       </section>
 
       {/* =========================================================================
@@ -238,7 +254,7 @@ export const LilySanctuaryPage: React.FC = () => {
           {lilyFlowersList.map((flower) => (
             <div
               key={flower.id}
-              className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 shadow-soft hover:shadow-card-hover flex flex-col justify-between ${flower.bgColor} ${flower.borderColor}`}
+              className={`p-6 sm:p-7 rounded-3xl border transition-all duration-300 shadow-soft hover:shadow-card-hover flex flex-col justify-between ${flower.bgColor} ${flower.borderColor}`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -270,22 +286,39 @@ export const LilySanctuaryPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 3: A LILY POEM
+          SECTION 3: A LILY POEM PAIRED WITH HER FRAMED PHOTO
          ========================================================================= */}
-      <section className="max-w-2xl mx-auto p-8 rounded-3xl bg-white/90 border border-[#D2E6D9] shadow-soft text-center paper-texture">
-        <span className="text-3xl mb-2 block">🪷✨🤍</span>
-        <h3 className="font-serif text-2xl font-semibold text-[#25332B] mb-3">
-          To the One with the Lily-Soft Heart
-        </h3>
-        <div className="space-y-2 text-sm sm:text-base font-serif italic text-[#3E5F4B] leading-relaxed mb-4">
-          <p>The lily does not worry when the winter wind is cold,</p>
-          <p>It sleeps beneath the quiet soil, patiently and bold.</p>
-          <p>And when the warm sun calls its name, it rises pure and white,</p>
-          <p>A gentle gift of elegance, of softness, and of light.</p>
+      <section className="max-w-3xl mx-auto p-8 sm:p-10 rounded-3xl bg-white/95 border border-[#D2E6D9] shadow-soft text-center paper-texture">
+        <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
+          <div className="w-36 sm:w-44 shrink-0 mx-auto">
+            <div className="polaroid-frame p-2.5 pb-3 bg-white rounded-xl shadow-md rotate-[-2deg]">
+              <div className="washi-tape bg-[#D0E8D7]" />
+              <img
+                src="/assets/gallery/photo-15.webp"
+                alt="Kakun"
+                className="aspect-square w-full object-cover rounded-lg mb-1"
+              />
+              <p className="font-handwriting text-center text-xs font-semibold text-[#3E5F4B]">
+                Pure & gentle 🪷
+              </p>
+            </div>
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <span className="text-3xl mb-2 block">🪷✨🤍</span>
+            <h3 className="font-serif text-2xl font-semibold text-[#25332B] mb-2">
+              To the One with the Lily-Soft Heart
+            </h3>
+            <div className="space-y-1.5 text-sm font-serif italic text-[#3E5F4B] leading-relaxed mb-3">
+              <p>The lily does not worry when the winter wind is cold,</p>
+              <p>It sleeps beneath the quiet soil, patiently and bold.</p>
+              <p>And when the warm sun calls its name, it rises pure and white,</p>
+              <p>A gentle gift of elegance, of softness, and of light.</p>
+            </div>
+            <p className="font-handwriting text-xl text-[#2F4A39]">
+              Always stay as gentle and wonderful as you are, Kakun 🧸🪷
+            </p>
+          </div>
         </div>
-        <p className="font-handwriting text-2xl text-[#2F4A39]">
-          Always stay as gentle and wonderful as you are, Kakun 🧸🪷
-        </p>
       </section>
     </div>
   );
