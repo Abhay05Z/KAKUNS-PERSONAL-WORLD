@@ -1,6 +1,11 @@
 # Dependencies
 node_modules/
 
+# Root loose media downloads (organized cleanly in public/assets/)
+/*.webp
+/*.jfif
+/*.mp4
+
 # Production build
 dist/
 dist-ssr/
