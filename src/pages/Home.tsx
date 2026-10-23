@@ -13,6 +13,7 @@ import {
   Flower2
 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
+import { ThemeSelectorBar } from '../components/common/ThemeSelectorBar';
 
 export const Home: React.FC = () => {
   const iconMap: Record<string, React.FC<{ className?: string }>> = {
@@ -46,6 +47,16 @@ export const Home: React.FC = () => {
       accentRing: "hover:ring-[#FED7DF]/60",
       illustrationSymbol: "🧸",
       actionText: "56 Reels & Poetry",
+    },
+    {
+      gradient: "from-[#F2F8F4] to-[#EAF3EC]",
+      border: "border-[#D0E5D7]",
+      tagBg: "bg-[#DCEEE2]",
+      tagText: "text-[#3E5F4B]",
+      buttonBg: "bg-[#3E5F4B] hover:bg-[#2F4A39]",
+      accentRing: "hover:ring-[#D0E5D7]/60",
+      illustrationSymbol: "🪷",
+      actionText: "Enter Lily Sanctuary",
     },
     {
       gradient: "from-[#FFF0F3] to-[#FFEBEF]",
@@ -87,16 +98,6 @@ export const Home: React.FC = () => {
       illustrationSymbol: "💌",
       actionText: "Her Personal Space",
     },
-    {
-      gradient: "from-[#F2F8F4] to-[#EAF3EC]",
-      border: "border-[#D0E5D7]",
-      tagBg: "bg-[#DCEEE2]",
-      tagText: "text-[#3E5F4B]",
-      buttonBg: "bg-[#3E5F4B] hover:bg-[#2F4A39]",
-      accentRing: "hover:ring-[#D0E5D7]/60",
-      illustrationSymbol: "🪷",
-      actionText: "Enter Lily Sanctuary",
-    },
   ];
 
   return (
@@ -120,6 +121,11 @@ export const Home: React.FC = () => {
         <p className="font-handwriting text-xl sm:text-2xl text-[#8C565F] mt-2">
           {siteConfig.heroNote}
         </p>
+
+        {/* Prominent One-Click Soft Theme Switcher Bar */}
+        <div className="mt-5">
+          <ThemeSelectorBar />
+        </div>
       </section>
 
       {/* Gateway Cards Grid */}

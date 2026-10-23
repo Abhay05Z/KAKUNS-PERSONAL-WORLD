@@ -18,6 +18,7 @@ import {
 import { siteConfig } from '../../data/siteConfig';
 import { safeStorage } from '../../utils';
 import { SoftThemeMode } from '../../types';
+import { useTheme } from '../../context/ThemeContext';
 
 interface NavbarProps {
   lilyPetalsEnabled: boolean;
@@ -33,6 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onChangeSoftTheme,
 }) => {
   const location = useLocation();
+  const { colors } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themePickerOpen, setThemePickerOpen] = useState(false);
   const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
@@ -72,7 +74,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8DFD3]/80 transition-all">
+    <header
+      className="sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-500"
+      style={{
+        backgroundColor: colors.bgNav,
+        borderColor: colors.borderSoft,
+      }}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         {/* Brand / Logo */}
         <div className="flex items-center gap-3">
