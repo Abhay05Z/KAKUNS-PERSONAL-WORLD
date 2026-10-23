@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #FAF7F2;
+    --paper-card: #FFFFFF;
+    --cream-accent: #F4EBD9;
+    --blush-accent: #FED7DF;
+    --dusty-rose: #B47B82;
+    --deep-rose: #8C565F;
+    --charcoal: #2C2727;
+    --warm-brown: #4D3F3B;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--charcoal);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-handwriting {
+    font-family: 'Caveat', 'Dancing Script', cursive;
+  }
+}
+
+/* Subtle organic paper texture effect */
+.paper-texture {
+  background-color: #ffffff;
+  background-image: radial-gradient(#d6c9b8 0.75px, transparent 0.75px), radial-gradient(#d6c9b8 0.75px, #ffffff 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  background-opacity: 0.15;
+}
+
+/* Polaroid photo card style */
+.polaroid-frame {
+  background-color: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(60, 40, 40, 0.1), 0 4px 10px -2px rgba(60, 40, 40, 0.05);
+  border: 1px solid rgba(230, 220, 210, 0.7);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.polaroid-frame:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: 0 18px 35px -8px rgba(180, 123, 130, 0.2), 0 8px 16px -4px rgba(60, 40, 40, 0.06);
+}
+
+/* Washi tape effect */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 90px;
+  height: 24px;
+  background-color: rgba(254, 215, 223, 0.65);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(180, 123, 130, 0.3);
+  border-right: 2px dashed rgba(180, 123, 130, 0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  z-index: 10;
+}
+
+/* Custom delicate scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E6DCF3;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B47B82;
+}
+
+/* Smooth motion when reduced-motion is not requested */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
