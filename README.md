@@ -10,15 +10,18 @@ This project is an intimate, scrapbook-inspired digital experience structured ar
 ### 🌟 Explore the World
 1. **Her Gallery (`/#/gallery`)**: All **49 photographs** (including the 3 brand-new additions) arranged in multiple manners: *Scrapbook Collage* (with washi tape, organic rotations, and cute pookie emoji stickers), *Polaroid Wall*, and *Classic Grid*. Click-to-expand lightbox with captions and keyboard navigation.
 2. **Poetry & Video Vault (`/#/poetry`)**: All **56 video reels** paired with lyrical verses, plus **interactive wax-sealed envelopes** (🧸, 🎀, 🍓, 🧁, 🍰) that unseal with heartfelt poetry and framed photographs!
-3. **Her Mind & Personality (`/#/mindset`)**: Editorial cards showcasing her nature, values, quiet strengths, dreams, and signature traits.
-4. **The Way I See Her (`/#/perspective`)**: Warm, sincere reflections, subtle qualities she might overlook in herself, and heartfelt appreciation.
-5. **Things She Should Remember (`/#/reminders`)**: Grounding advice for difficult days, permission to rest, random reminder reveal, and local "Save to Favorites" support.
-6. **Her Personal Space (`/#/personal-space`)**:
+3. **The Lily Sanctuary (`/#/lily-sanctuary`)**: A brand-new ultra-soft theme featuring an interactive blooming white lily, the poetic *Language of Lilies* (Madonna, Water Lily, Blushing Lily, Lily of the Valley), and soothing offline wind chimes 🪷🤍.
+4. **Her Mind & Personality (`/#/mindset`)**: Editorial cards showcasing her nature, values, quiet strengths, dreams, and signature traits.
+5. **The Way I See Her (`/#/perspective`)**: Warm, sincere reflections, subtle qualities she might overlook in herself, and heartfelt appreciation.
+6. **Things She Should Remember (`/#/reminders`)**: Grounding advice for difficult days, permission to rest, random reminder reveal, and local "Save to Favorites" support.
+7. **Her Personal Space (`/#/personal-space`)**:
    - **Personal Rituals**: Gentle routines with zero-guilt completion toggles.
    - **Timeline Memories**: Scrapbook milestones with date, location, photo, and notes.
    - **Personal Letter**: Paper-textured letter with wax seal aesthetic.
    - **Interactive Surprises**: Clickable envelopes, Digital Jar of Kind Words, hidden message reveal, and celebration confetti.
    - **Teddy Companion 🧸**: Interactive floating teddy mascot offering cute hugs, affirmations, and pastel sparkle bursts!
+   - **Lily Petals Option 🪷**: Toggleable floating lily petals drifting gently across every page.
+   - **4 Soft Themes 🎨**: Instantly switch the website's color ambiance between *Blush & Rose*, *White Lily & Sage*, *Muted Lavender*, and *Vanilla Honey*!
 
 ---
 
