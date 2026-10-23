@@ -1,5 +1,5 @@
 export interface SiteConfig {
-  recipientName: string; // Configurable placeholder e.g. "Kakun" or "[Her Name]"
+  recipientName: string; // Configurable placeholder e.g. "Kakun"
   recipientNickname?: string;
   welcomeHeading: string;
   welcomeSubheading: string;
@@ -21,11 +21,13 @@ export interface ThemeCardConfig {
 
 export type GalleryCategory =
   | 'all'
+  | 'new'
   | 'favorites'
   | 'candid'
   | 'portraits'
   | 'places'
-  | 'memories';
+  | 'memories'
+  | 'poetry-reels';
 
 export interface GalleryItem {
   id: string;
@@ -34,8 +36,25 @@ export interface GalleryItem {
   caption: string;
   category: GalleryCategory;
   date?: string;
-  focalPosition?: string; // e.g. 'center', 'top', '50% 30%'
+  focalPosition?: string;
   note?: string;
+  poetrySnippet?: string;
+  isNewAddition?: boolean;
+  tiltAngle?: number;
+  tapeColor?: string;
+  pookieSticker?: string;
+}
+
+export interface PoetryVideoItem {
+  id: string;
+  videoPath: string;
+  thumbnailPath: string;
+  title: string;
+  couplet: string; // Hindi/Urdu couplet or poetic lines
+  translation?: string; // Poetic English reflection
+  mood: 'soulful' | 'aesthetic' | 'nazm' | 'whimsical' | 'melodic' | 'warm';
+  durationTag?: string;
+  pookieEmoji?: string;
 }
 
 export interface PersonalityEntry {
@@ -46,6 +65,7 @@ export interface PersonalityEntry {
   categoryTitle?: string;
   quote?: string;
   tags?: string[];
+  poeticVerse?: string;
 }
 
 export interface PerspectiveEntry {
@@ -54,6 +74,7 @@ export interface PerspectiveEntry {
   body: string;
   highlightPhrase?: string;
   category: 'appreciation' | 'noticed' | 'respect' | 'unique' | 'letter';
+  poeticNote?: string;
 }
 
 export interface ReminderItem {
@@ -63,13 +84,14 @@ export interface ReminderItem {
   category: 'difficult-day' | 'worth' | 'daily' | 'rest' | 'control';
   tag: string;
   isDailyFeatured?: boolean;
+  teddyHugMessage?: string;
 }
 
 export interface RitualItem {
   id: string;
   title: string;
   description: string;
-  frequency: string; // e.g. 'Every Morning', 'Whenever Needed', 'Evening Wind-down'
+  frequency: string;
   category: string;
   iconName: string;
 }
@@ -82,6 +104,7 @@ export interface MemoryItem {
   description: string;
   imagePath?: string;
   personalNote?: string;
+  poeticLine?: string;
 }
 
 export interface LetterConfig {

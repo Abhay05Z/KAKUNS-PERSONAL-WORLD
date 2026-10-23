@@ -9,26 +9,50 @@ import {
   Heart,
   Maximize2,
   Filter,
-  Image as ImageIcon
+  Shuffle,
+  Grid,
+  Layers,
+  Film,
+  Smile,
+  BookOpen
 } from 'lucide-react';
-import { galleryItems } from '../data/siteConfig';
+import confetti from 'canvas-confetti';
+import { allGalleryPhotos } from '../data/mediaData';
+import { siteConfig } from '../data/siteConfig';
 import { GalleryItem, GalleryCategory } from '../types';
 
 export const GalleryPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<GalleryCategory>('all');
+  const [photos, setPhotos] = useState<GalleryItem[]>(allGalleryPhotos);
+  const [viewMode, setViewMode] = useState<'scrapbook' | 'grid' | 'filmstrip'>('scrapbook');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const categories: { key: GalleryCategory; label: string }[] = [
-    { key: 'all', label: 'All Photos' },
-    { key: 'favorites', label: 'Favorites' },
-    { key: 'candid', label: 'Candid Moments' },
-    { key: 'portraits', label: 'Portraits' },
-    { key: 'places', label: 'Favorite Places' },
-    { key: 'memories', label: 'Special Memories' },
+    { key: 'all', label: `All Photos (${allGalleryPhotos.length}) 📸` },
+    { key: 'new', label: '✨ Fresh New Additions (3) 🎀' },
+    { key: 'favorites', label: 'Favorites 💖' },
+    { key: 'candid', label: 'Candid Moments 🧸' },
+    { key: 'portraits', label: 'Portraits 🌸' },
+    { key: 'places', label: 'Favorite Places 🌿' },
+    { key: 'memories', label: 'Special Memories 🍯' },
   ];
 
-  const filteredItems = galleryItems.filter((item) => {
+  // Shuffle photos to break any linear sequence
+  const shufflePhotos = () => {
+    const shuffled = [...photos].sort(() => Math.random() - 0.5);
+    setPhotos(shuffled);
+    confetti({
+      particleCount: 30,
+      spread: 60,
+      origin: { y: 0.6 },
+      colors: ['#FED7DF', '#F4EBD9', '#B47B82', '#E6DCF3'],
+      disableForReducedMotion: true,
+    });
+  };
+
+  const filteredItems = photos.filter((item) => {
     if (selectedCategory === 'all') return true;
+    if (selectedCategory === 'new') return item.isNewAddition;
     return item.category === selectedCategory;
   });
 
@@ -40,12 +64,16 @@ export const GalleryPage: React.FC = () => {
   // Lightbox navigation
   const handlePrev = useCallback(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => (prev === null || prev === 0 ? filteredItems.length - 1 : prev - 1));
+    setLightboxIndex((prev) =>
+      prev === null || prev === 0 ? filteredItems.length - 1 : prev - 1
+    );
   }, [lightboxIndex, filteredItems.length]);
 
   const handleNext = useCallback(() => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((prev) => (prev === null || prev === filteredItems.length - 1 ? 0 : prev + 1));
+    setLightboxIndex((prev) =>
+      prev === null || prev === filteredItems.length - 1 ? 0 : prev + 1
+    );
   }, [lightboxIndex, filteredItems.length]);
 
   const handleClose = useCallback(() => {
@@ -79,154 +107,276 @@ export const GalleryPage: React.FC = () => {
 
   return (
     <div className="w-full">
-      {/* Editorial Header Section */}
-      <section className="text-center pt-2 sm:pt-4 pb-8 max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4EBD9] text-[#8C565F] text-xs font-medium tracking-wide mb-3 border border-[#EADBC1]">
+      {/* Header Section */}
+      <section className="text-center pt-2 sm:pt-4 pb-8 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4EBD9] text-[#8C565F] text-xs font-medium tracking-wide mb-3 border border-[#EADBC1] shadow-2xs">
           <Camera className="w-3.5 h-3.5" />
-          <span>Theme 01 • Her Gallery</span>
+          <span>The 49 Moments Scrapbook • Kakun 🧸🎀</span>
         </div>
 
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#2C2727] mb-3">
-          A Visual Diary
+        <h1 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-[#2C2727] mb-3">
+          Tilted Polaroids & Captured Grace 🌸
         </h1>
 
-        <p className="font-sans text-sm sm:text-base text-[#645450] leading-relaxed">
-          Moments frozen in soft light. A visual anthology of genuine smiles, candid glimpses, and quiet memories.
+        <p className="font-sans text-sm sm:text-base text-[#645450] leading-relaxed max-w-xl mx-auto">
+          All 49 photographs scattered artfully with washi tape, teddy stickers, and poetic verses.
+          Explore in different manners — as a moodboard, cinematic filmstrip, or classic grid.
         </p>
 
-        <p className="font-handwriting text-xl sm:text-2xl text-[#8C565F] mt-2">
-          "Every picture holds a quiet little story."
-        </p>
-      </section>
-
-      {/* Category Filter Tabs */}
-      <section className="mb-8" aria-label="Filter by photo category">
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
-          <div className="hidden sm:flex items-center gap-1 text-xs text-[#8C7A75] mr-2">
-            <Filter className="w-3.5 h-3.5" />
-            <span>Category:</span>
-          </div>
-          {categories.map((cat) => {
-            const isActive = selectedCategory === cat.key;
-            return (
-              <button
-                key={cat.key}
-                onClick={() => {
-                  setSelectedCategory(cat.key);
-                  setLightboxIndex(null);
-                }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  isActive
-                    ? 'bg-[#8C565F] text-white shadow-xs'
-                    : 'bg-white/80 text-[#645450] hover:bg-[#FED7DF]/60 border border-[#E8DFD3]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
+        {/* Poetic couplet banner */}
+        <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-[#FFF5F5] via-[#FFF8F4] to-[#FAF8FC] border border-[#FED7DF] max-w-lg mx-auto text-xs sm:text-sm text-[#8C565F] font-serif italic">
+          "हर तस्वीर में तेरी इक नई अदा है, <br />
+          तू मुस्कुरा दे तो सारा जहां फिदा है... ✨🧸"
         </div>
-      </section>
 
-      {/* Photo Grid with Polaroid and Editorial frames */}
-      {filteredItems.length === 0 ? (
-        <div className="text-center py-20 bg-white/60 rounded-2xl border border-dashed border-[#DFCBA8] max-w-md mx-auto p-6">
-          <ImageIcon className="w-10 h-10 text-[#DFCBA8] mx-auto mb-3" />
-          <h3 className="font-serif text-lg font-medium text-[#2C2727] mb-1">
-            No photographs in this collection yet
-          </h3>
-          <p className="text-xs text-[#8C7A75]">
-            When new photographs are added for this category, they will appear here.
-          </p>
+        {/* Controls: Manner/View Switcher & Shuffle */}
+        <div className="mt-6 flex items-center justify-center gap-2.5 flex-wrap">
           <button
-            onClick={() => setSelectedCategory('all')}
-            className="mt-4 px-4 py-1.5 bg-[#8C565F] text-white text-xs rounded-full"
+            onClick={shufflePhotos}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8C565F] hover:bg-[#72434B] text-white text-xs sm:text-sm font-medium transition-all shadow-sm hover:scale-103"
           >
-            Show All Photos
+            <Shuffle className="w-3.5 h-3.5" />
+            <span>Shuffle Photos (Non-Sequence) 🔀</span>
           </button>
+
+          <div className="inline-flex items-center bg-white p-1 rounded-full border border-[#E8DFD3] shadow-2xs">
+            <button
+              onClick={() => setViewMode('scrapbook')}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors ${
+                viewMode === 'scrapbook' ? 'bg-[#FED7DF] text-[#8C565F]' : 'text-[#645450]'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Scrapbook Moodboard 🧸</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode('filmstrip')}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors ${
+                viewMode === 'filmstrip' ? 'bg-[#FED7DF] text-[#8C565F]' : 'text-[#645450]'
+              }`}
+            >
+              <Film className="w-3.5 h-3.5" />
+              <span>Filmstrip Reel 🎞️</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors ${
+                viewMode === 'grid' ? 'bg-[#FED7DF] text-[#8C565F]' : 'text-[#645450]'
+              }`}
+            >
+              <Grid className="w-3.5 h-3.5" />
+              <span>Classic Grid 📸</span>
+            </button>
+          </div>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      </section>
+
+      {/* Category Filter Pills */}
+      <section className="mb-10 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+        {categories.map((cat) => {
+          const isActive = selectedCategory === cat.key;
+          return (
+            <button
+              key={cat.key}
+              onClick={() => {
+                setSelectedCategory(cat.key);
+                setLightboxIndex(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                isActive
+                  ? 'bg-[#8C565F] text-white shadow-xs'
+                  : 'bg-white/80 text-[#645450] hover:bg-[#FED7DF]/60 border border-[#E8DFD3]'
+              }`}
+            >
+              {cat.label}
+            </button>
+          );
+        })}
+      </section>
+
+      {/* =========================================================================
+          VIEW MANNER 1: SCATTERED SCRAPBOOK & MOODBOARD (Tilted, Taped & Pookie)
+         ========================================================================= */}
+      {viewMode === 'scrapbook' && (
+        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-9 p-2">
           {filteredItems.map((photo, index) => (
             <div
               key={photo.id}
               onClick={() => setLightboxIndex(index)}
-              className="polaroid-frame rounded-md p-3 sm:p-4 cursor-pointer group flex flex-col justify-between"
+              style={{
+                transform: `rotate(${photo.tiltAngle || 0}deg)`,
+              }}
+              className="polaroid-frame rounded-md p-3 sm:p-4 cursor-pointer group flex flex-col justify-between relative bg-white transition-all duration-300 hover:z-30 hover:!rotate-0 hover:scale-105"
               tabIndex={0}
               role="button"
               aria-label={`Open photo: ${photo.title}`}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setLightboxIndex(index);
-                }
-              }}
             >
+              {/* Washi Tape Strip on Top */}
+              <div
+                className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 backdrop-blur-xs border-x-2 border-dashed border-white/60 shadow-2xs z-10 pointer-events-none"
+                style={{ backgroundColor: photo.tapeColor || 'rgba(254, 215, 223, 0.7)' }}
+              />
+
+              {/* Pookie Sticker in Corner */}
+              <div className="absolute -bottom-2 -right-2 text-2xl z-20 transform group-hover:scale-125 transition-transform select-none">
+                {photo.pookieSticker || '🧸'}
+              </div>
+
+              {/* Fresh New Photo Badge */}
+              {photo.isNewAddition && (
+                <div className="absolute top-2 left-2 z-20 bg-[#D53A60] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md animate-bounce">
+                  ✨ NEW 🎀
+                </div>
+              )}
+
               {/* Photo Canvas */}
-              <div className="relative aspect-4/5 sm:aspect-square w-full overflow-hidden bg-[#FAF6EE] rounded-sm mb-3">
+              <div className="relative aspect-4/5 w-full overflow-hidden bg-[#FAF6EE] rounded-sm mb-3">
                 <img
                   src={photo.imagePath}
                   alt={photo.title}
                   loading="lazy"
                   style={{ objectPosition: photo.focalPosition || 'center' }}
                   className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
-                  onError={(e) => {
-                    // Fallback to elegant graphic placeholder if missing
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      const placeholder = document.createElement('div');
-                      placeholder.className = "w-full h-full flex flex-col items-center justify-center p-4 text-center bg-[#FAF0E6]";
-                      placeholder.innerHTML = `<span class="text-3xl mb-1">🌸</span><p class="text-xs font-serif text-[#8C565F]">${photo.title}</p>`;
-                      parent.appendChild(placeholder);
-                    }
-                  }}
                 />
-                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="p-2 rounded-full bg-white/90 text-[#2C2727] shadow-sm transform scale-90 group-hover:scale-100 transition-transform">
+                <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="p-2 rounded-full bg-white/90 text-[#2C2727] shadow-sm">
                     <Maximize2 className="w-4 h-4" />
                   </span>
                 </div>
               </div>
 
-              {/* Polaroid Caption & Handwritten note */}
+              {/* Handwritten Note & Poetry Snippet */}
               <div className="pt-1 px-1">
                 <div className="flex items-center justify-between text-[11px] text-[#A08883] mb-1">
-                  <span className="uppercase tracking-wider font-medium text-[#8C565F]">
-                    {photo.category}
+                  <span className="uppercase tracking-wider font-semibold text-[#8C565F]">
+                    {photo.isNewAddition ? 'Fresh Moment' : photo.category}
                   </span>
-                  {photo.date && (
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {photo.date}
+                  <span>{photo.date}</span>
+                </div>
+
+                <h3 className="font-serif text-base font-semibold text-[#2C2727] leading-snug truncate">
+                  {photo.title}
+                </h3>
+
+                {photo.poetrySnippet && (
+                  <p className="font-handwriting text-base text-[#8C565F] line-clamp-1 mt-1">
+                    "{photo.poetrySnippet}"
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* =========================================================================
+          VIEW MANNER 2: CINEMATIC FILMSTRIP REEL
+         ========================================================================= */}
+      {viewMode === 'filmstrip' && (
+        <section className="space-y-6">
+          <div className="p-4 bg-[#1F1D1D] rounded-2xl shadow-xl overflow-x-auto pb-6">
+            <div className="flex items-center gap-1 text-white/50 text-xs uppercase tracking-widest mb-3 px-2">
+              <Film className="w-4 h-4 text-[#FED7DF]" />
+              <span>Vintage 35mm Memory Reel • Kakun's Anthology</span>
+            </div>
+
+            {/* Horizontal Film Strip Container */}
+            <div className="flex items-center gap-4 min-w-max">
+              {filteredItems.map((photo, index) => (
+                <div
+                  key={photo.id}
+                  onClick={() => setLightboxIndex(index)}
+                  className="w-56 sm:w-64 bg-black p-3 rounded-lg border-y-4 border-dashed border-white/30 cursor-pointer group hover:scale-102 transition-transform"
+                >
+                  <div className="flex justify-between items-center text-[10px] text-white/60 mb-2 px-1">
+                    <span>FRAME 0{index + 1}</span>
+                    <span>{photo.pookieSticker || '🧸'}</span>
+                  </div>
+
+                  <div className="relative aspect-4/5 w-full overflow-hidden bg-stone-900 rounded-sm mb-2">
+                    <img
+                      src={photo.imagePath}
+                      alt={photo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+
+                  <div className="text-white text-xs">
+                    <h4 className="font-serif text-white/90 truncate">{photo.title}</h4>
+                    <p className="text-[10px] text-[#FED7DF] font-serif italic truncate">
+                      {photo.poetrySnippet || photo.caption}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* =========================================================================
+          VIEW MANNER 3: CLASSIC EDITORIAL GRID
+         ========================================================================= */}
+      {viewMode === 'grid' && (
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredItems.map((photo, index) => (
+            <div
+              key={photo.id}
+              onClick={() => setLightboxIndex(index)}
+              className="rounded-2xl p-4 bg-white border border-[#E8DFD3] shadow-soft hover:shadow-card-hover transition-all duration-300 cursor-pointer group flex flex-col justify-between"
+            >
+              <div>
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#FAF6EE] mb-3">
+                  <img
+                    src={photo.imagePath}
+                    alt={photo.title}
+                    loading="lazy"
+                    style={{ objectPosition: photo.focalPosition || 'center' }}
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform"
+                  />
+                  {photo.isNewAddition && (
+                    <span className="absolute top-2 left-2 bg-[#D53A60] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      ✨ NEW
                     </span>
                   )}
                 </div>
 
-                <h3 className="font-serif text-base sm:text-lg font-medium text-[#2C2727] leading-snug">
+                <div className="flex items-center justify-between text-xs text-[#8C565F] font-semibold mb-1">
+                  <span className="uppercase">{photo.category}</span>
+                  <span>{photo.pookieSticker || '🧸'}</span>
+                </div>
+
+                <h3 className="font-serif text-lg font-semibold text-[#2C2727] mb-1">
                   {photo.title}
                 </h3>
 
-                <p className="font-handwriting text-base sm:text-lg text-[#645450] line-clamp-1 mt-0.5">
-                  {photo.note || photo.caption}
+                <p className="font-sans text-xs text-[#645450] line-clamp-2">
+                  {photo.caption}
                 </p>
               </div>
+
+              {photo.poetrySnippet && (
+                <div className="pt-2 mt-2 border-t border-[#F2ECE4] text-xs font-serif italic text-[#8C565F]">
+                  "{photo.poetrySnippet}"
+                </div>
+              )}
             </div>
           ))}
-        </div>
+        </section>
       )}
 
-      {/* Lightbox Modal */}
+      {/* =========================================================================
+          LIGHTBOX MODAL WITH POETRY & POOKIE HUGS
+         ========================================================================= */}
       {activePhoto && lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-fade-in"
           onClick={handleClose}
           role="dialog"
           aria-modal="true"
-          aria-label={activePhoto.title}
         >
-          {/* Lightbox Content Container */}
           <div
             className="relative max-w-4xl w-full bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
@@ -234,32 +384,29 @@ export const GalleryPage: React.FC = () => {
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Close photo view"
+              className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Left/Prev Arrow */}
+            {/* Left/Prev */}
             <button
               onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Previous photo"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            {/* Right/Next Arrow */}
+            {/* Right/Next */}
             <button
               onClick={handleNext}
-              className="absolute right-3 md:right-[380px] top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Next photo"
+              className="absolute right-3 md:right-[380px] top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
 
             {/* Image Canvas */}
-            <div className="flex-1 bg-black/95 flex items-center justify-center min-h-[300px] sm:min-h-[450px] relative overflow-hidden">
+            <div className="flex-1 bg-black flex items-center justify-center min-h-[300px] sm:min-h-[460px]">
               <img
                 src={activePhoto.imagePath}
                 alt={activePhoto.title}
@@ -271,8 +418,9 @@ export const GalleryPage: React.FC = () => {
             <div className="w-full md:w-80 lg:w-96 p-6 sm:p-7 flex flex-col justify-between bg-[#FAF7F2] border-t md:border-t-0 md:border-l border-[#E8DFD3] overflow-y-auto">
               <div>
                 <div className="flex items-center justify-between text-xs text-[#8C565F] font-semibold uppercase tracking-wider mb-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#FED7DF]">
-                    {activePhoto.category}
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#FED7DF] flex items-center gap-1">
+                    <span>{activePhoto.pookieSticker || '🧸'}</span>
+                    <span>{activePhoto.isNewAddition ? '✨ Fresh New Image' : activePhoto.category}</span>
                   </span>
                   <span>{lightboxIndex + 1} of {filteredItems.length}</span>
                 </div>
@@ -288,14 +436,21 @@ export const GalleryPage: React.FC = () => {
                   </div>
                 )}
 
+                {/* Poetry verse callout */}
+                {activePhoto.poetrySnippet && (
+                  <div className="p-4 rounded-xl bg-[#FFF5F5] border border-[#FED7DF] mb-4 text-xs sm:text-sm text-[#8C565F] font-serif italic">
+                    "{activePhoto.poetrySnippet}"
+                  </div>
+                )}
+
                 <div className="text-sm text-[#4D3F3B] leading-relaxed mb-4 p-3 bg-white/70 rounded-xl border border-[#EADBC1]">
                   <p className="font-sans">{activePhoto.caption}</p>
                 </div>
 
                 {activePhoto.note && (
-                  <div className="pt-2">
+                  <div>
                     <span className="text-[11px] uppercase tracking-wider text-[#8C7A75] font-semibold block mb-1">
-                      A Little Note:
+                      A Tender Note:
                     </span>
                     <p className="font-handwriting text-xl text-[#8C565F] leading-snug">
                       "{activePhoto.note}"
@@ -304,13 +459,10 @@ export const GalleryPage: React.FC = () => {
                 )}
               </div>
 
-              {/* Lightbox Footer Navigation helper */}
+              {/* Bottom Navigation helper */}
               <div className="pt-6 border-t border-[#E8DFD3] flex items-center justify-between text-xs text-[#A08883]">
                 <span>Use ← and → arrow keys</span>
-                <button
-                  onClick={handleClose}
-                  className="text-[#8C565F] hover:underline font-medium"
-                >
+                <button onClick={handleClose} className="text-[#8C565F] hover:underline font-medium">
                   Done
                 </button>
               </div>
